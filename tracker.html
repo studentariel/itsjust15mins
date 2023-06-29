@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th:nth-child(2) {
+            background-color: #b3d9ff;
+        }
+
+        th:nth-child(3) {
+            background-color: #66b3ff;
+        }
+
+        th:nth-child(4) {
+            background-color: #3399ff;
+        }
+
+        th:nth-child(5) {
+            background-color: #0066ff;
+        }
+
+        input[type="checkbox"]:checked + input[type="text"] {
+            text-decoration: line-through;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addRow() {
+                const tableBody = document.querySelector('#timeTrackerTable tbody');
+                const newRow = document.createElement('tr');
+
+                const timeCell = document.createElement('td');
+                const timeInput = document.createElement('input');
+                timeInput.type = 'text';
+                timeCell.appendChild(timeInput);
+                newRow.appendChild(timeCell);
+
+                for (let i = 0; i < 4; i++) {
+                    const taskCell = document.createElement('td');
+                    const taskCheckbox = document.createElement('input');
+                    taskCheckbox.type = 'checkbox';
+                    const taskInput = document.createElement('input');
+                    taskInput.type = 'text';
+                    taskCell.appendChild(taskCheckbox);
+                    taskCell.appendChild(taskInput);
+                    newRow.appendChild(taskCell);
+                }
+
+                tableBody.appendChild(newRow);
+            }
+
+            const addButton = document.querySelector('button[onclick="addRow()"]');
+            addButton.onclick = function () {
+                addRow();
+            };
+        });
+    </script>
+</head>
+<body>
+    <h1>it's just 15 minutes</h1>
+    <table id="timeTrackerTable">
+        <thead>
+            <tr>
+                <th>Hour</th>
+                <th>:00-:15</th>
+                <th>:15-:30</th>
+                <th>:30-:45</th>
+                <th>:45-:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" placeholder="Enter time"></td>
+                <td>
+                    <input type="checkbox">
+                    <input type="text" placeholder="Task">
+                </td>
+                <td>
+                    <input type="checkbox">
+                    <input type="text" placeholder="Task">
+                </td>
+                <td>
+                    <input type="checkbox">
+                    <input type="text" placeholder="Task">
+                </td>
+                <td>
+                    <input type="checkbox">
+                    <input type="text" placeholder="Task">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="addRow()">Add Time Slot</button>
+</body>
+</html>
